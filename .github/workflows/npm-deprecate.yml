@@ -1,0 +1,18 @@
+# This workflow will deprecate a version of the @batpb/genart-rgb package
+
+name: Node.js Package Deprecate
+
+on: workflow_dispatch
+
+jobs:
+  deprecate-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: https://registry.npmjs.org/
+      - run: npm deprecate @batpb/genart-rgb@0.3.x "version 0.3.x is no longer supported"
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
