@@ -15,23 +15,62 @@
  * See the GNU Affero General Public License for more details.
  */
 
-import {Color, ColorSelector} from "@batpb/genart-base";
+import P5Lib from 'p5';
+import {Color, ColorSelector, Random, SketchContext} from '@batpb/genart-base';
+import {RGBRange} from "./rgb-range";
 
-class RGBColorSelector implements ColorSelector {
-    get colorNames(): string[] {
+const p5: P5Lib = SketchContext.p5;
+
+abstract class RGBColorSelector extends ColorSelector {
+    private readonly _unlimitedColors: boolean;
+
+    public constructor(_rgbRange: RGBRange);
+    public constructor(_rgbRange: RGBRange, unlimitedColors: true);
+    public constructor(_rgbRange: RGBRange, unlimitedColors: false, colorCount: number)
+    public constructor(_rgbRange: RGBRange, unlimitedColors: false, colorCount: number, randomOrder: boolean);
+    public constructor(private readonly _rgbRange: RGBRange,
+                       unlimitedColors?: boolean,
+                       colorCount?: number,
+                       randomOrder?: boolean) {
+        super(randomOrder);
+        this._unlimitedColors = unlimitedColors ?? Random.randomBoolean();
+
+        if (!this._unlimitedColors && colorCount) {
+            colorCount = p5.constrain(colorCount, 2, 10);
+            this.chooseColors(colorCount);
+        }
+    }
+
+    public override getColor(): Color {
+        let col: Color = this.generateColor();
+
+        if (!this._unlimitedColors) {
+            col = this.selectColorFromChoices();
+        }
+
+        return col;
+    }
+
+    public override get colorNames(): string[] {
         return [];
     }
 
-    getColor(): Color {
-        return new Color();
-    }
-
-    get hasPalette(): boolean {
+    public override get hasPalette(): boolean {
         return false;
     }
 
-    get name(): string {
-        return "";
+    private chooseColors(colorCount: number): void {
+        for (let i: number = 0; i < colorCount; i++) {
+            const c: Color = this.generateColor();
+            this.addColorChoice(c);
+        }
+    }
+
+    private generateColor(): Color {
+        const r: number = Random.randomInt(this._rgbRange.redRange.min, this._rgbRange.redRange.max);
+        const g: number = Random.randomInt(this._rgbRange.greenRange.min, this._rgbRange.greenRange.max);
+        const b: number = Random.randomInt(this._rgbRange.blueRange.min, this._rgbRange.blueRange.max);
+        return new Color(p5.color(r, g, b));
     }
 }
 
