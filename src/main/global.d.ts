@@ -15,36 +15,6 @@
  * See the GNU Affero General Public License for more details.
  */
 
-import eslint from '@rollup/plugin-eslint';
-import analyzer from 'rollup-plugin-analyzer';
-import ts from 'rollup-plugin-ts';
-
-export default {
-    input: './src/main/index.ts',
-    output: {
-        dir: './out',
-        format: 'umd',
-        name: 'genart-rgb',
-        sourcemap: true,
-        preserveModules: false,
-        globals: {
-            'p5': 'p5',
-            '@batpb/genart-base': 'genartBase'
-        }
-    },
-    external: [
-        'p5',
-        '@batpb/genart-base'
-    ],
-    plugins: [
-        eslint({
-            include: ['./src/**/*.ts'],
-            throwOnError: true,
-            throwOnWarning: true
-        }),
-        analyzer({
-            summaryOnly: false
-        }),
-        ts()
-    ]
-};
+import module from 'p5';
+export = module;
+export as namespace P5Lib;
