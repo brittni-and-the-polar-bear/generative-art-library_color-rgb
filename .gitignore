@@ -2,3 +2,6 @@
 
 # Webstorm
 .idea/
+
+# npm
+node_modules/
