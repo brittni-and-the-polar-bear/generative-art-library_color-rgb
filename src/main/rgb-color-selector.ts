@@ -15,4 +15,24 @@
  * See the GNU Affero General Public License for more details.
  */
 
-export * from './rgb-color-selector';
+import {Color, ColorSelector} from "@batpb/genart-base";
+
+class RGBColorSelector implements ColorSelector {
+    get colorNames(): string[] {
+        return [];
+    }
+
+    getColor(): Color {
+        return new Color();
+    }
+
+    get hasPalette(): boolean {
+        return false;
+    }
+
+    get name(): string {
+        return "";
+    }
+}
+
+export {RGBColorSelector};
