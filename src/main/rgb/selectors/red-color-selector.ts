@@ -24,8 +24,8 @@ class RedColorSelector extends RGBColorSelector {
                        randomOrder?: boolean) {
         super({
             redRange: new Range(125, 255),
-            greenRange: new Range(0, 75),
-            blueRange: new Range(0, 75)},
+            greenRange: new Range(0, 100),
+            blueRange: new Range(0, 100)},
             unlimitedColors,
             colorCount,
             randomOrder);
