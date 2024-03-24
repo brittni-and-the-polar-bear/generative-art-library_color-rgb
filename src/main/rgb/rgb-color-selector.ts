@@ -24,10 +24,6 @@ const p5: P5Lib = SketchContext.p5;
 abstract class RGBColorSelector extends ColorSelector {
     private readonly _unlimitedColors: boolean;
 
-    public constructor(_rgbRange: RGBRange);
-    public constructor(_rgbRange: RGBRange, unlimitedColors: true);
-    public constructor(_rgbRange: RGBRange, unlimitedColors: false, colorCount: number)
-    public constructor(_rgbRange: RGBRange, unlimitedColors: false, colorCount: number, randomOrder: boolean);
     public constructor(private readonly _rgbRange: RGBRange,
                        unlimitedColors?: boolean,
                        colorCount?: number,
@@ -35,8 +31,15 @@ abstract class RGBColorSelector extends ColorSelector {
         super(randomOrder);
         this._unlimitedColors = unlimitedColors ?? Random.randomBoolean();
 
-        if (!this._unlimitedColors && colorCount) {
-            colorCount = p5.constrain(colorCount, 2, 10);
+        if (!this._unlimitedColors) {
+            const minColors: number = 2;
+            const maxColors: number = 10;
+
+            if (!colorCount) {
+                colorCount = Random.randomInt(minColors, maxColors + 1);
+            }
+
+            colorCount = p5.constrain(colorCount, minColors, maxColors);
             this.chooseColors(colorCount);
         }
     }

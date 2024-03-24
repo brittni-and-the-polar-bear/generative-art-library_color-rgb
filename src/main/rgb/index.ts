@@ -15,4 +15,5 @@
  * See the GNU Affero General Public License for more details.
  */
 
-export * from './rgb';
+export * from './rgb-range';
+export * from './rgb-color-selector';
