@@ -16,7 +16,7 @@
  */
 
 import P5Lib from 'p5';
-import {Color, ColorSelector, Random, SketchContext} from '@batpb/genart-base';
+import {Color, ColorSelector, ColorSelectorType, Random, SketchContext} from '@batpb/genart-base';
 import {RGBRange} from "./rgb-range";
 
 const p5: P5Lib = SketchContext.p5;
@@ -58,8 +58,8 @@ abstract class RGBColorSelector extends ColorSelector {
         return [];
     }
 
-    public override get hasPalette(): boolean {
-        return false;
+    override get type(): ColorSelectorType {
+        return ColorSelectorType.RGB;
     }
 
     private chooseColors(colorCount: number): void {
