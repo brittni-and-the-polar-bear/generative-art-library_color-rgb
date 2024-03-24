@@ -15,4 +15,4 @@
  * See the GNU Affero General Public License for more details.
  */
 
-test.todo('Write Tests!');
+test.todo('Add tests for red color selector');

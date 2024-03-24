@@ -15,6 +15,25 @@
  * See the GNU Affero General Public License for more details.
  */
 
-export * from './rgb-range';
-export * from './rgb-color-selector';
-export * from './selectors';
+import {Range} from '@batpb/genart-base';
+import {RGBColorSelector} from '../rgb-color-selector';
+
+class RedColorSelector extends RGBColorSelector {
+    public constructor(unlimitedColors?: boolean,
+                       colorCount?: number,
+                       randomOrder?: boolean) {
+        super({
+            redRange: new Range(125, 255),
+            greenRange: new Range(0, 75),
+            blueRange: new Range(0, 75)},
+            unlimitedColors,
+            colorCount,
+            randomOrder);
+    }
+
+    get name(): string {
+        return 'red rgb color selector';
+    }
+}
+
+export {RedColorSelector};
