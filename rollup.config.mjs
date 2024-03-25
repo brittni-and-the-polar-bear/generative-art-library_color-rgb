@@ -43,7 +43,7 @@ export default {
             throwOnWarning: true
         }),
         analyzer({
-            summaryOnly: false
+            summaryOnly: true
         }),
         ts()
     ]

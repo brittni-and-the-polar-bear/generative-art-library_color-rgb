@@ -17,7 +17,7 @@
 
 import {Range} from '@batpb/genart-base';
 import {RedColorSelector, RGBColorSelector, RGBRange} from '../../../main';
-import {testColorSelector} from './index';
+import {testColorSelector, testInOrderColorSelector} from './index';
 
 describe('red color selector tests', (): void => {
     const redRGBRange: RGBRange = {
@@ -30,4 +30,27 @@ describe('red color selector tests', (): void => {
       const selector: RGBColorSelector = new RedColorSelector(true);
       testColorSelector(selector, redRGBRange);
    });
+
+    test.each([
+        {count: 2, expectedCount: 2},
+        {count: 5, expectedCount: 5},
+        {count: 10, expectedCount: 10},
+        {count: -4, expectedCount: 2},
+        {count: 15, expectedCount: 10},
+    ])('test in-order red color selector ($count colors)',
+        ({count, expectedCount}): void => {
+            const selector: RGBColorSelector = new RedColorSelector(false, count, false);
+            testInOrderColorSelector(selector, redRGBRange, expectedCount);
+        }
+    );
+
+    test('test limited red color selector', (): void => {
+        const selector: RGBColorSelector = new RedColorSelector(false);
+        testColorSelector(selector, redRGBRange);
+    });
+
+    test('test default red color selector', (): void => {
+        const selector: RGBColorSelector = new RedColorSelector();
+        testColorSelector(selector, redRGBRange);
+    })
 });

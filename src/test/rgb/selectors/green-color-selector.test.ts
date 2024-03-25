@@ -17,7 +17,7 @@
 
 import {GreenColorSelector, RGBColorSelector, RGBRange} from '../../../main';
 import {Range} from '@batpb/genart-base';
-import {testColorSelector} from './index';
+import {testColorSelector, testInOrderColorSelector} from './index';
 
 describe('green color selector tests', (): void => {
     const greenRGBRange: RGBRange = {
@@ -30,4 +30,27 @@ describe('green color selector tests', (): void => {
         const selector: RGBColorSelector = new GreenColorSelector(true);
         testColorSelector(selector, greenRGBRange);
     });
+
+    test.each([
+        {count: 2, expectedCount: 2},
+        {count: 5, expectedCount: 5},
+        {count: 10, expectedCount: 10},
+        {count: -4, expectedCount: 2},
+        {count: 15, expectedCount: 10},
+    ])('test in-order green color selector ($count colors)',
+        ({count, expectedCount}): void => {
+            const selector: RGBColorSelector = new GreenColorSelector(false, count, false);
+            testInOrderColorSelector(selector, greenRGBRange, expectedCount);
+        }
+    );
+
+    test('test limited green color selector', (): void => {
+        const selector: RGBColorSelector = new GreenColorSelector(false);
+        testColorSelector(selector, greenRGBRange);
+    });
+
+    test('test default green color selector', (): void => {
+        const selector: RGBColorSelector = new GreenColorSelector();
+        testColorSelector(selector, greenRGBRange);
+    })
 });
