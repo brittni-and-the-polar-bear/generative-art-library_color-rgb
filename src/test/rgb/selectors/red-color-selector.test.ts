@@ -15,4 +15,19 @@
  * See the GNU Affero General Public License for more details.
  */
 
-test.todo('Add tests for red color selector');
+import {Range} from '@batpb/genart-base';
+import {RedColorSelector, RGBColorSelector, RGBRange} from '../../../main';
+import {testColorSelector} from './index';
+
+describe('red color selector tests', (): void => {
+    const redRGBRange: RGBRange = {
+        redRange: new Range(125, 255),
+        greenRange: new Range(0, 100),
+        blueRange: new Range(0, 100)
+    }
+
+   test('test unlimited red color selector', (): void => {
+      const selector: RGBColorSelector = new RedColorSelector(true);
+      testColorSelector(selector, redRGBRange);
+   });
+});
