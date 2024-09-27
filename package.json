@@ -55,21 +55,18 @@
   "dependencies": {
     "@batpb/genart-base": "^0.4.1",
     "@types/p5": "^1.7.6",
-    "p5": "^1.9.1"
+    "p5": "^1.11.0"
   },
   "devDependencies": {
-    "@rollup/plugin-eslint": "^9.0.5",
-    "@types/jest": "^29.5.12",
-    "@typescript-eslint/eslint-plugin": "^7.3.1",
-    "@typescript-eslint/parser": "^7.3.1",
+    "@types/jest": "^29.5.13",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "rollup": "^4.13.0",
+    "rollup": "^4.22.5",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-ts": "^3.4.5",
-    "ts-jest": "^29.1.2",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "tslib": "^2.6.2",
+    "tslib": "^2.7.0",
     "typescript": "^5.4.3"
   }
 }

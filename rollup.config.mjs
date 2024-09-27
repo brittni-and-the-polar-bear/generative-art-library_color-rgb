@@ -15,7 +15,6 @@
  * See the GNU Affero General Public License for more details.
  */
 
-import eslint from '@rollup/plugin-eslint';
 import analyzer from 'rollup-plugin-analyzer';
 import ts from 'rollup-plugin-ts';
 
@@ -37,11 +36,6 @@ export default {
         '@batpb/genart-base'
     ],
     plugins: [
-        eslint({
-            include: ['./src/**/*.ts'],
-            throwOnError: true,
-            throwOnWarning: true
-        }),
         analyzer({
             summaryOnly: false
         }),
