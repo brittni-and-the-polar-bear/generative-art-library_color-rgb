@@ -55,7 +55,7 @@
   "dependencies": {
     "@batpb/genart-base": "^0.4.1",
     "@types/p5": "^1.7.6",
-    "p5": "^1.11.0"
+    "p5": "^1.11.1"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
